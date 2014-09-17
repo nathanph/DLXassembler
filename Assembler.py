@@ -1,3 +1,6 @@
 __author__ = 'Nate'
 
-print("test")
+import sys
+import getopt
+
+print(sys.argv)
