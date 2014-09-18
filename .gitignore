@@ -1,6 +1,5 @@
 /cookbooks/
 /tmp/librarian/
-/.idea
 /.vagrant
 /.chef
-/environment
+/.idea

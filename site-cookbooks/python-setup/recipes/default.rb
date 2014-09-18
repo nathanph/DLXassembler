@@ -9,7 +9,13 @@
 
 include_recipe "python"
 
-python_virtualenv '/vagrant/environment' do
+directory '/environments' do
+    owner 'vagrant'
+    group 'vagrant'
+    action :create
+end
+
+python_virtualenv '/environments/DLXassembler' do
    interpreter "python3"
    owner 'vagrant'
    group 'vagrant'
