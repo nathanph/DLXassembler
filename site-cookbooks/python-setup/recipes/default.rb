@@ -22,4 +22,6 @@ python_virtualenv '/home/vagrant/.virtualenvs/DLXassembler' do
    action :create
 end
 
-# TODO:: Install Ply in virtualenv
+python_pip "ply" do
+  virtualenv "/home/vagrant/.virtualenvs/DLXassembler"
+end
