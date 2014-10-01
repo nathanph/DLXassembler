@@ -5,4 +5,6 @@ from Instruction import Instruction
 
 class Itype(Instruction):
     def encode(self):
-        pass
+        for token in self.tokens:
+            if token.type == 'REGISTER':
+                print("R"+str(token.value),end=" ")

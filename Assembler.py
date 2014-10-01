@@ -1,8 +1,8 @@
 __author__ = 'Nathan Hernandez'
 
 import sys
-from Rtype import Rtype
-from Jtype import Jtype
+# from Rtype import Rtype
+# from Jtype import Jtype
 from Instruction import Instruction
 from Dlexer import Lexer
 import ply.yacc as yacc
@@ -15,9 +15,10 @@ from calc import MyLexer
 def main():
     data = 'label2: jalr R0, label3, 4\njalr test test 0x45\nnop\n.asciiz "This is a string! Hello world!"'
 
-    file = open('inputs/intShift.dlx', 'r')
+    file = open('inputs/data.dlx', 'r')
     data = file.read()
     print(data)
+    print()
 
     lexer = Lexer()
     # lexer.test(data)
@@ -37,11 +38,22 @@ def main():
             print(tokens)
             instructions.append(Instruction(tokens.copy()))
             tokens.clear()
-        # print(tok)
+    # instructions.append(Instruction(tokens.copy()))
+    print(tokens)
+
 
 
     for instruction in instructions:
-        print(instruction.opcode())
+        # if instruction.isItype():
+        #     print(instruction.opcode() + " ITYPE")
+        # elif instruction.isJtype():
+        #     print(instruction.opcode() + " JTYPE")
+        # elif instruction.isRtype():
+        #     print(instruction.opcode() + " RTYPE")
+        print(instruction.__class__)
+        instruction.encode()
+        print()
+
 
 if __name__ == "__main__":
     main()

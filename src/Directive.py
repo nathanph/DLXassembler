@@ -3,8 +3,9 @@ __author__ = 'Nathan Hernandez'
 from Instruction import Instruction
 
 
-class Rtype(Instruction):
+class Directive(Instruction):
     def encode(self):
         for token in self.tokens:
-            if token.type == 'REGISTER':
-                print("R"+str(token.value),end=" ")
+            if token.type == 'STRING':
+                print(token.value + " ")
+        pass
