@@ -3,6 +3,7 @@ __author__ = 'Nathan Hernandez'
 import sys
 from Rtype import Rtype
 from Jtype import Jtype
+from Instruction import Instruction
 from Dlexer import Lexer
 import ply.yacc as yacc
 import ply.lex as lex
@@ -12,22 +13,35 @@ from calc import MyLexer
 
 
 def main():
-    # rTest = Rtype("nop", 0, 0)
-    # jTest = Jtype("j", 2)
-    # print(sys.argv)
-    # print(rTest)
-    # print(jTest)
-    data = "add R0, 5(r1)"
-    # lexer = Lexer()
-    # l = MyLexer()
-    # l.build()
-    # l.test("3 + 4")
+    data = 'label2: jalr R0, label3, 4\njalr test test 0x45\nnop\n.asciiz "This is a string! Hello world!"'
+
     file = open('inputs/intShift.dlx', 'r')
-    # data = file.read()
+    data = file.read()
     print(data)
 
     lexer = Lexer()
-    lexer.test(data)
+    # lexer.test(data)
+    lexer.input(data)
+
+    tokens = []
+    instructions = []
+
+    # Generate instructions from tokens.
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break
+        if tok.type != 'EOL':
+            tokens.append(tok)
+        else:
+            print(tokens)
+            instructions.append(Instruction(tokens.copy()))
+            tokens.clear()
+        # print(tok)
+
+
+    for instruction in instructions:
+        print(instruction.opcode())
 
 if __name__ == "__main__":
     main()
