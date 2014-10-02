@@ -70,17 +70,17 @@ class Lexer:
 
     # Regular expression for decimals.
     def t_DECIMAL(self, t):
-        r'\b([0-9]|[1-9][0-9]*)\b'
+        r'[\-]{0,1}\b([0-9]|[1-9][0-9]*)\b'
         return t
 
     # Regular expression for octals.
     def t_OCTAL(self, t):
-        r'\b0[1-7][0-7]*\b'
+        r'[\-]{0,1}\b0[1-7][0-7]*\b'
         return t
 
     # Regular expression for hexadecimals.
     def t_HEXADECIMAL(self, t):
-        r'0x[0-9a-fA-F]+'
+        r'[\-]{0,1}0x[0-9a-fA-F]+'
         return t
 
     # Regular expression for directives.

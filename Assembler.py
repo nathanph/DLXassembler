@@ -13,7 +13,7 @@ from calc import MyLexer
 
 
 def main():
-    data = 'label2: jalr R0, label3, 4\njalr test test 0x45\nnop\n.asciiz "This is a string! Hello world!"'
+    data = 'label1:	.word 32, 127, 1023, -1, 0x1, -0x2, 04, -03'
 
     file = open('inputs/data.dlx', 'r')
     data = file.read()
@@ -39,8 +39,7 @@ def main():
             instructions.append(Instruction(tokens.copy()))
             tokens.clear()
     # instructions.append(Instruction(tokens.copy()))
-    print(tokens)
-
+    print("==========")
 
 
     for instruction in instructions:
