@@ -1,6 +1,6 @@
 __author__ = 'Nathan Hernandez'
 
-from Instruction import Instruction
+from src.Instruction import Instruction
 
 
 class Directive(Instruction):
@@ -8,4 +8,7 @@ class Directive(Instruction):
         for token in self.tokens:
             if token.type == 'STRING':
                 print(token.value + " ")
+            else:
+                print(token.value)
         pass
+

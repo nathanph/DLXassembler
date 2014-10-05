@@ -29,20 +29,19 @@
               "directives2","double1",    "double2",      "float1",  "float2",
               "space",      "text1",      "text2",        "word1",   "word2",
               "data"
-
             );
 
 
-$candir = "/u/css/classes/5483/144/DLXAssembler/Inputs/";
+$candir = "inputs/";
 
-$dir = "Tests/";
+$dir = "outputs/";
 
 if (! -e $dir)
 {
    print "need to create a Tests directory first\n";
    exit();
 }
-system "rm -f Tests/*";                                                                                
+system "rm -f outputs/*";
 
 $pass = 0;
 
@@ -56,7 +55,7 @@ for ($i = 0; $i <= $#canfiles; $i++){
    print "Testing $input. ";
 
 #  change the command in quotes below to call your executable
-   system "java -jar Assemble.jar $input";
+   system "python Assembler.py $input";
 
    #print "Comparing $output and $canoutput\n";
    $problemFile = $prefix . ".problems";
@@ -68,13 +67,13 @@ for ($i = 0; $i <= $#canfiles; $i++){
    if (!(-e $output)) {
          #didn't create an output file, copy input file to Tests directory
          print " Failed.\n";
-         system "mv $input Tests/";
+         system "mv $input outputs/";
    } elsif ($problemFileSize > 0){
          #print "problems found in $output, keeping all temp files.\n";
          print " Failed.\n";
-         system "mv $input Tests/";
-         system "mv $output Tests/";
-         system "mv $problemFile Tests/";
+         system "mv $input outputs/";
+         system "mv $output outputs/";
+         system "mv $problemFile outputs/";
    } else {
          #print "No problems found removing all temp files.\n";
          system "rm -rf $output $input $problemFile";
@@ -86,7 +85,7 @@ for ($i = 0; $i <= $#canfiles; $i++){
 $total = $#canfiles + 1;
 print "\n$pass out of $total passed.\n";
 if ($pass != $total) {
-   print "See Tests directory for failed tests\n";
+   print "See outputs directory for failed tests\n";
 }
 
 

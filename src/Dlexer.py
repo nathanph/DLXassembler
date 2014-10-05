@@ -18,6 +18,7 @@ class Lexer:
     tokens = [
         'OPCODE',
         'REGISTER',
+        'FP_REGISTER',
         'DECIMAL',
         'OCTAL',
         'HEXADECIMAL',
@@ -50,6 +51,11 @@ class Lexer:
         t.value = int(t.value[1:])
         return t
 
+    def t_ANY_FP_REGISTER(self, t):
+        r'\b[Ff]([0-9]|[1-2][0-9]|3[0-1])\b'
+        t.value = int(t.value[1:])
+        return t
+
     # Regular expression for label declaration
     def t_LABEL_DECLARATION(self, t):
         r'[a-zA-Z][a-zA-Z0-9]*:'
@@ -64,7 +70,7 @@ class Lexer:
 
     # Regular expression for opcodes.
     def t_OPCODE(self, t):
-        r'[a-zA-Z][a-zA-Z0-9]+'
+        r'[a-zA-Z][a-zA-Z0-9]*'
         t.lexer.begin('label')
         return t
 
