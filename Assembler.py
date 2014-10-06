@@ -1,12 +1,7 @@
 __author__ = 'Nathan Hernandez'
 
 import sys
-# from Rtype import Rtype
-# from Jtype import Jtype
 from src.Instruction import Instruction
-# from Dlexer import Lexer
-# import ply.yacc as yacc
-# import ply.lex as lex
 from src.Dlexer import Lexer
 from src.Encoder import Encoder
 import os.path
@@ -61,21 +56,13 @@ def main():
             if(len(tokens)>0):
                 instructions.append(Instruction(tokens.copy()))
             tokens.clear()
-    # instructions.append(Instruction(tokens.copy()))
+
     if DEBUG:
         print("==========")
 
     for instruction in instructions:
-        # if instruction.isItype():
-        # print(instruction.opcode() + " ITYPE")
-        # elif instruction.isJtype():
-        #     print(instruction.opcode() + " JTYPE")
-        # elif instruction.isRtype():
-        #     print(instruction.opcode() + " RTYPE")
         if DEBUG:
             print(instruction.__class__)
-            # instruction.encode()
-            print()
     if DEBUG:
         print("==========")
 
