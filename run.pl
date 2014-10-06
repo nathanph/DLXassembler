@@ -38,7 +38,7 @@ $dir = "outputs/";
 
 if (! -e $dir)
 {
-   print "need to create a Tests directory first\n";
+   print "need to create an outputs directory first\n";
    exit();
 }
 system "rm -f outputs/*";
@@ -55,7 +55,7 @@ for ($i = 0; $i <= $#canfiles; $i++){
    print "Testing $input.\n";
 
 #  change the command in quotes below to call your executable
-   system "python Assembler.py $input";
+   system "python3 Assembler.py $input";
 
    #print "Comparing $output and $canoutput\n";
    $problemFile = $prefix . ".problems";
