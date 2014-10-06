@@ -9,6 +9,7 @@ from src.Instruction import Instruction
 # import ply.lex as lex
 from src.Dlexer import Lexer
 from src.Encoder import Encoder
+import os.path
 
 # from calc import MyLexer
 
@@ -20,8 +21,18 @@ def main():
     fileName = "inputs/double1"
 
     if len(sys.argv) > 1:
+        if sys.argv[1][-4:] != '.dlx':
+            print("You do not include a file with a DLX extension.")
+            return
+        if not os.path.isfile(sys.argv[1]):
+            print("No such file exists: "+sys.argv[1])
+            return
         fileName = sys.argv[1][:-4]
         DEBUG=False
+    else:
+        print("You did not include a file.")
+        return
+
 
     file = open(fileName+'.dlx', 'r')
 
