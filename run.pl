@@ -52,7 +52,7 @@ for ($i = 0; $i <= $#canfiles; $i++){
    $caninput = $candir.$prefix.".dlx";
    $canoutput = $candir.$prefix.".hex";
    system "cp $caninput .";
-   print "Testing $input. ";
+   print "Testing $input.\n";
 
 #  change the command in quotes below to call your executable
    system "python Assembler.py $input";

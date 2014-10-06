@@ -49,6 +49,7 @@ class Instruction(object):
             self.__init__()
         elif self.directive() is not None:
             self.__class__ = Directive
+            self.__init__()
 
 
     @abstractmethod
@@ -91,6 +92,9 @@ class Instruction(object):
         for rType in self.rTypes:
             if mnemonic == rType:
                 return True
+        # Check for NOP
+        if self.labelDeclaration() and self.mnemonic() is None and self.directive() is None:
+            return True
         return False
 
     def directive(self):
@@ -130,16 +134,61 @@ class Instruction(object):
 
     def offset(self):
         for token in self.tokens:
-            if token.type == 'LPAREN':
-                return token
+            if token.type == 'RPAREN':
+                return True
         return None
+
+    def strings(self):
+        strings = []
+        for token in self.tokens:
+            if token.type == 'STRING':
+                strings.append(token.value+"\0")
+        return strings
+
+    def patternMatch(self, tokenTypes):
+        matchIndex = 0
+        for token in self.tokens:
+            if(matchIndex>=len(tokenTypes)):
+                break
+            if tokenTypes[matchIndex] == 'NUMERIC':
+                if token.type == 'DECIMAL' or token.type == 'HEXADECIMAL' or token.type == 'OCTAL':
+                    matchIndex += 1
+            elif tokenTypes[matchIndex] == 'REGISTER':
+                if token.type == 'REGISTER' or token.type == 'FP_REGISTER':
+                    matchIndex += 1
+            elif token.type == tokenTypes[matchIndex]:
+                matchIndex+=1
+        if matchIndex == len(tokenTypes):
+            return True
+        return False
 
     def numeric(self):
         for token in self.tokens:
-            if token.type == 'DECIMAL' or token.type == 'HEXADECIMAL' or token.type == 'OCTAL':
+            if token.type == 'DECIMAL':
                 return int(token.value)
+            elif token.type == 'HEXADECIMAL':
+                return int(token.value,16)
+            elif token.type == 'OCTAL':
+                return int(token.value,8)
         return None
 
+    def numerics(self):
+        numerics = []
+        for token in self.tokens:
+            if token.type == 'DECIMAL':
+                numerics.append(int(token.value))
+            elif token.type == 'HEXADECIMAL':
+                numerics.append(int(token.value,16))
+            elif token.type == 'OCTAL':
+                numerics.append(int(token.value,8))
+        return numerics
+
+    def floats(self):
+        floats = []
+        for token in self.tokens:
+            if token.type == 'FLOAT':
+                floats.append(float(token.value))
+        return floats
 
     def __str__(self):
         ret = ''
@@ -155,13 +204,15 @@ class Instruction(object):
             elif token.type == 'LPAREN':
                 ret += '('
             elif token.type == 'RPAREN':
-                ret += '\b)'
+                ret += ')'
+            elif token.type == 'FLOAT':
+                ret += str(token.value) + " "
             elif token.type == 'HEXADECIMAL':
-                ret += str(token.value)
+                ret += str(token.value) + " "
             elif token.type == 'DECIMAL':
-                ret += str(token.value)
+                ret += str(token.value) + " "
             elif token.type == 'OCTAL':
-                ret += str(token.value)
+                ret += str(token.value) + " "
             else:
                 ret += token.value + " "
         return ret

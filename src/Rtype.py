@@ -60,7 +60,7 @@ class NoRegister(Rtype):
     def encode(self, labelAddress=None, currentAddress=None):
         # mnemonic = self.mnemonic()
         # print(mnemonic + ": " + str(self.opcode()) + " " + str(self.functionCode()))
-        opcode = self.opcode() << (32 - 6)
-        unused = 0
-        func = self.functionCode() << (32 - 6 - 5 - 5 - 5 - 5 - 5)
-        return '{:08x}'.format(opcode | unused | func)
+        # opcode = self.opcode() << (32 - 6)
+        # unused = 0
+        # func = self.functionCode() << (32 - 6 - 5 - 5 - 5 - 5 - 5)
+        return '{:08x}'.format(0)

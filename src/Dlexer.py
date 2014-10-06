@@ -19,6 +19,7 @@ class Lexer:
         'OPCODE',
         'REGISTER',
         'FP_REGISTER',
+        'FLOAT',
         'DECIMAL',
         'OCTAL',
         'HEXADECIMAL',
@@ -47,10 +48,11 @@ class Lexer:
     # REGISTER token.
     # TODO:: Report this as a bug. REGISTER should still be recognized first because it's declared before LABEL.
     def t_ANY_REGISTER(self, t):
-        r'\b[Rr]([0-9]|[1-2][0-9]|3[0-1])\b'
+        r'\b[RrFf]([0-9]|[1-2][0-9]|3[0-1])\b'
         t.value = int(t.value[1:])
         return t
 
+    # Regular expression for floating point registers.
     def t_ANY_FP_REGISTER(self, t):
         r'\b[Ff]([0-9]|[1-2][0-9]|3[0-1])\b'
         t.value = int(t.value[1:])
@@ -74,6 +76,15 @@ class Lexer:
         t.lexer.begin('label')
         return t
 
+
+    # Regular expression for directives.
+    def t_DIRECTIVE(self, t):
+        r'(\.[a-zA-Z]+) '
+        return t
+    # Regular expression for floats.
+    def t_FLOAT(self, t):
+        r'[\-]{0,1}\d*\.\d*'
+        return t
     # Regular expression for decimals.
     def t_DECIMAL(self, t):
         r'[\-]{0,1}\b([0-9]|[1-9][0-9]*)\b'
@@ -89,14 +100,11 @@ class Lexer:
         r'[\-]{0,1}0x[0-9a-fA-F]+'
         return t
 
-    # Regular expression for directives.
-    def t_DIRECTIVE(self, t):
-        r'(\.[a-zA-Z]+) '
-        return t
+
 
     # Regular expression for strings.
     def t_STRING(self, t):
-        r'".*"'
+        r'".*?"'
         t.value = t.value[1:-1]
         return t
 
