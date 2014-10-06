@@ -1,7 +1,9 @@
 DLXassembler
 ============
 
-A python assembler for the DLX instruction set.
+A python assembler for the DLX instruction set.  
+
+All 34 tests pass.
 
 **Requirements:**  
 * ply==3.4
