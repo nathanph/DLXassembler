@@ -1,7 +1,9 @@
 DLXassembler
 ============
 
-A python assembler for the DLX instruction set.
+A python assembler for the DLX instruction set.  
+
+All 34 tests pass.
 
 **Requirements:**  
 * ply==3.4
@@ -15,7 +17,7 @@ Within this project you will find a Vagrantfile and Cheffile. These two files to
 
 1. Install [VirtualBox](https://www.virtualbox.org/).  
 2. Install [Vagrant](https://www.vagrantup.com/).  
-3. Install Librarian Chef.  
+3. Install Librarian Chef.
     (For Windows)  
     ```$ vagrant plugin install vagrant-librarian-chef-nochef```  
       
