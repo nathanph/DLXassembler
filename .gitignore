@@ -1,6 +1,7 @@
 /src/__pycache__/
 /cookbooks/
 /outputs/*
+!/outputs/.gitignore
 /tmp/librarian/
 /.vagrant
 /.chef
