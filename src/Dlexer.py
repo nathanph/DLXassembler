@@ -1,7 +1,7 @@
 __author__ = 'Nathan Hernandez'
 
-import ply.lex as lex
-
+# import ply.lex as lex
+import lib.ply.lex as lex
 
 class Lexer:
     # Dictonary of reserved words. Technically all registers and opcodes would exist within this dictionary, but I
