@@ -33,8 +33,4 @@ Within this project you will find a Vagrantfile and Cheffile. These two files to
 ### Student Machine (ewwwww)
 You'll need to use install the appropriate packages using pip3 and the included requirements.txt file.  
 
-1. Install required packages.  
-
-    ```$ pip3 install < requirements.txt```  
-    
-2. Run ```./run.pl``` or call Assembler.py directly by running ```python3 Assembler.py <input_file_name>```.
+1. Run ```./run.pl``` or call Assembler.py directly by running ```python3 Assembler.py <input_file_name>```.
